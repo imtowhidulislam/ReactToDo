@@ -1,9 +1,10 @@
 import './App.css';
+import { Todo } from './components/index';
 
 function App() {
   return (
     <div>
-      <h2 className='bg-blue-300 font-bold text-center uppercase text-red-700'>This is Towhidul Islam</h2>
+      <Todo />
     </div>
   );
 }
