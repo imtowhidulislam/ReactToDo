@@ -5,6 +5,7 @@ const SingleTodo = () => {
     const [todo , setTodo] = useState("");
     const [search , setSearch] = useState("");
     const [mytodo, setMytodo] = useState([]);
+    const [edit, setEdit] = useState(null)
 
     const searchChange = (e) => {
         console.log('searching todo');
@@ -35,10 +36,18 @@ const SingleTodo = () => {
         console.log(id);
        const a = mytodo.filter(to => to.id === id);
        console.log(a);
+
+       setTodo()
     }
-    
+    useEffect(() => {
+        const localTodo = JSON.parse(localStorage.getItem('todo'))
+        if(localTodo) {
+            setMytodo(localTodo)
+        }
+    },[])
     useEffect(() => {
         console.log(mytodo);
+        localStorage.setItem('todo', JSON.stringify(mytodo));
     },[mytodo])
     useEffect(() => {
         console.log(todo);

@@ -1,1 +1,1 @@
-export {default as Todo} from '../pages/Todo'
+export { default as Todo } from '../pages/Todo'
