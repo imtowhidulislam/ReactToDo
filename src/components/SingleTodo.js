@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import {AiFillDelete, AiFillEdit} from 'react-icons/ai'
+import formatDistanceToNow from 'date-fns/esm/formatDistanceToNow';
 
 const SingleTodo = () => {
     const [todo , setTodo] = useState("");
@@ -20,7 +21,7 @@ const SingleTodo = () => {
         e.preventDefault();
 
         if(edited){
-            const updateTodo = mytodo.map(currVal => currVal.id === edited ? (currVal = {todo, id:currVal.id, isDone}) : currVal)
+            const updateTodo = mytodo.map(currVal => currVal.id === edited ? (currVal = {todo, id:currVal.id, isDone, createdAt:currVal.createdAt}) : currVal)
             setMytodo(updateTodo);
             setTodo("")
             setEdited(0)
@@ -28,7 +29,8 @@ const SingleTodo = () => {
         }
         if(todo) {
             const id = new Date().getTime().toString();
-            const newTodo = {todo,id, isDone};
+            const createdAt = Date.now();
+            const newTodo = {todo,id, isDone, createdAt};
             setMytodo([...mytodo ,newTodo])
             setTodo("")
         }
@@ -73,25 +75,27 @@ const SingleTodo = () => {
             </div>
             <div className='flex items-center justify-between bg-gray-200  mt-2 mb-8 active:border-blue-500 focus:border-blue-500'>
                 <input name="todo" placeholder='eg:your todos' className=' bg-transparent  p-2 w-full' value={todo} onChange={todoChange}></input>
-                <button onClick={handleSubmit} type="submit" className='bg-cyan-600 w-max py-2 px-4 uppercase font-bold cursor-pointer hover:bg-cyan-800 hover:text-gray-300'>add</button>
+                <button onClick={handleSubmit} type="submit" className='bg-cyan-600 w-max py-2 px-4 uppercase font-bold cursor-pointer hover:bg-cyan-800 hover:text-gray-300'>{edited ? 'edit' : 'add'}</button>
             </div>
         </form>
 
         {
              mytodo.map(todoo => {
-                const {id, todo, isDone} = todoo;
+                const {id, todo, isDone, createdAt} = todoo;
                 return (
                     <div className='mt-2 w-3/4' key={id}>
                         <div className='flex justify-between bg-gray-300 p-4 rounded drop-shadow-md'>
-
+                            <div>
                             <p className={isDone ? 'mr-4 break-words capitalize line-through' : 'mr-4 break-words capitalize'}><span className='mr-2'>
                                 <input type="checkbox" id='checkbox' onChange={() => handleCheck(id)} />
                                 </span>{todo}</p>
+                            <p className='capitalize ml-6 text-cyan-700 font-extralight'>{formatDistanceToNow(new Date(createdAt),{addSuffix: true})}</p>
+                            </div>
                             <div className='flex gap-4'>
                                 <button onClick={() => editTodo(id)} className='text-xl hover:text-teal-700 transition-color'>
                                     <AiFillEdit />
                                 </button>
-                                <button onClick={() => deleteTodo(id)} className='text-2xl hover:text-red-700 transition-color'>
+                                <button onClick={() => deleteTodo(id)} className='text-xl hover:text-red-700 transition-color'>
                                     <AiFillDelete />
                                 </button>
                             </div>
