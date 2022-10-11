@@ -5,15 +5,11 @@ import Todos from './Todos';
 
 const SingleTodo = () => {
     const [todo , setTodo] = useState("");
-    const [search, setSearch] = useState("");
     const [isDone, setIsDone] = useState(false);
-    const [check, setCheck] = useState(0);
     const [mytodo, setMytodo] = useState([]);
     const [edited , setEdited] = useState(0);
 
-    const searchChange = (e) => {
-        console.log('searching todo');
-    }
+    
     const todoChange = (e) =>{
         const {value} = e.target;
         setTodo(value)
@@ -36,12 +32,12 @@ const SingleTodo = () => {
             setTodo("")
         }
     }
-    // ! Delete Todo:
+    // ! Delete Todo:::
     const deleteTodo = (id) => {
         setMytodo(remTodo => remTodo.filter(toodo => toodo.id !== id))
     }
 
-    // ? Edit Todo:
+    // ? Edit Todo:::
     const editTodo = (id) => {
         const a = mytodo.find(to => to.id === id);
         const {todo:edittodo , id: editId} = a
@@ -49,12 +45,13 @@ const SingleTodo = () => {
         setTodo(edittodo)
     }
 
-    // ? HandleCheck 
+    // ? HandleCheck Button::: 
     const handleCheck = (ckId) => {
         const doneTodo = mytodo.map(ct => ct.id === ckId ? (ct = {...ct,isDone:!ct.isDone}):ct)
         setMytodo(doneTodo)
     }
     
+    // ! Fetching the todo data  form the LocalStorage and saving into the mytodo array.
     useEffect(() => {
         const localTodo = JSON.parse(localStorage.getItem('todo'))
         if(localTodo) {
@@ -62,6 +59,7 @@ const SingleTodo = () => {
         }
     },[])
     
+    // ? Saving the todos date to the LocalStorage:::
     useEffect(() => {
         localStorage.setItem('todo', JSON.stringify(mytodo));
         console.log(mytodo);
@@ -78,19 +76,16 @@ const SingleTodo = () => {
                 </div>
             </form>
         </div>
-        
-
-    <div className='my-16 w-full grid grid-cols-grid-col place-items-center max-w-7xl'>
-        {
-            mytodo.map(todoo => {
-                const {id, todo, isDone, createdAt} = todoo;
-                return (
-                    <Todos {...todoo} AiFillDelete={AiFillDelete} AiFillEdit={AiFillEdit} deleteTodo={deleteTodo} editTodo={editTodo} handleCheck={handleCheck} formatDistanceToNow={formatDistanceToNow}/>
-                )
-            }) 
-        }
-    </div>
-
+        <div className='pt-8 w-full px-8 lg:px-0 grid grid-cols-grid-col gap-4 place-items-center max-w-7xl'>
+            {
+                mytodo.map(todoo => {
+                    const {id, todo, isDone, createdAt} = todoo;
+                    return (
+                        <Todos {...todoo} AiFillDelete={AiFillDelete} AiFillEdit={AiFillEdit} deleteTodo={deleteTodo} editTodo={editTodo} handleCheck={handleCheck} formatDistanceToNow={formatDistanceToNow}/>
+                    )
+                }) 
+            }
+        </div>
     </div>
   )
 }

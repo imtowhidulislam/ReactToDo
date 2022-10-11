@@ -2,8 +2,8 @@ import React from 'react'
 
 const Todos = ({isDone, todo, id, AiFillDelete, AiFillEdit , editTodo, deleteTodo , handleCheck, formatDistanceToNow, createdAt}) => {
   return (
-        <div className='mt-4 w-3/4' key={id}>
-            <div className='flex bg-gray-300 p-4 rounded drop-shadow-md'>
+        <div className='mt-4 w-full' key={id}>
+            <div className='flex justify-between bg-gray-300 p-4 rounded drop-shadow-md'>
                 <div>
                 <p className={isDone ? 'mr-4 break-words capitalize line-through' : 'mr-4 break-words capitalize'}><span className='mr-2'>
                     <input type="checkbox" id='checkbox' onChange={() => handleCheck(id)} />
