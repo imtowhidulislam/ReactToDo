@@ -70,7 +70,7 @@ const SingleTodo = () => {
         <div className='w-full grid place-items-center bg-yellow-500  p-8'>
             <h2 className='uppercase text-4xl font-bold first-letter:text-cyan-600 mb-8'>My Todos</h2>
             <form onSubmit={handleSubmit} className="w-full max-w-7xl">
-                <div className='flex items-center justify-between mt-2 mb-8 bg-cyan-800 active:border-blue-500 focus:border-blue-500'>
+                <div className='flex items-center justify-between mt-2 mb-8 bg-cyan-700 active:border-blue-500 focus:border-blue-500'>
                     <input name="todo" placeholder='eg:your todos' className=' bg-transparent outline-none p-2 w-full' value={todo} onChange={todoChange}></input>
                     <button onClick={handleSubmit} type="submit" className='bg-cyan-600 w-max py-2 px-4 uppercase font-bold cursor-pointer hover:bg-cyan-800 hover:text-gray-300'>{edited ? 'edit' : 'add'}</button>
                 </div>
