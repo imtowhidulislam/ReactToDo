@@ -4,9 +4,9 @@ import formatDistanceToNow from "date-fns/esm/formatDistanceToNow";
 import Todos from "./Todos";
 import { toast } from "react-hot-toast";
 
-import emptyTodo from "../public/emptyTodo.svg";
-import emptyTodo1 from "../public/emptyTodo1.svg";
-import emptySvg from "../public/emptySvg1.svg";
+import emptyTodo from "../assets/emptyTodo.svg";
+import emptyTodo1 from "../assets/emptyTodo1.svg";
+import emptySvg from "../assets/emptySvg1.svg";
 
 const SingleTodo = () => {
   const [todo, setTodo] = useState("");
